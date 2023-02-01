@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap"
+      rel="stylesheet"
+    />
+    <!-- style -->
+    <style>
+      body {
+        
+      }
+
+      h1 {
+        font-family: "Patrick Hand SC", cursive;
+        color: #5b42f3;
+      }
+
+      input::placeholder {
+        font-weight: thin;
+        font-size: 15px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .button {
+        align-items: center;
+        background-image: linear-gradient(
+          144deg,
+          #af40ff,
+          #5b42f3 50%,
+          #00ddeb
+        );
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        display: flex;
+        font-size: 18px;
+        justify-content: center;
+        line-height: 1em;
+        height: 45px;
+        width: 100px;
+        padding: 3px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .button:active,
+      .button:hover {
+        outline: 0;
+      }
+
+      .button {
+        background-color: rgb(5, 6, 45);
+        padding: 16px 24px;
+        border-radius: 6px;
+        width: 100%;
+        height: 100%;
+        transition: 300ms;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 15px;
+      }
+
+      option {
+        padding: 16px 24px;
+        width: 100%;
+        height: 100%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        /* font-size: 8px; */
+        text-align: center;
+      }
+
+      .button:hover span {
+        background: none;
+        /* color:#0f0c29 */
+      }
+
+      .button:active {
+        transform: scale(0.9);
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      #qr {
+        /* display: none; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="container text-center p-4 flex justify-content-center align-items-center"
+    >
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <h1 class="">Generate Your Own QR</h1>
+      <img src="" alt="" id="qr" />
+      <hr style="background-color: white" />
+
+      <div class="input-group mt-1 w-50">
+        <!-- <label for=""></label> -->
+        <select class="custom-select form-control" id="inputGroupSelect02">
+          <!-- <option selected class="text-sm-center">Choose QR Code Size...</option> -->
+          <option value="100">100x100</option>
+          <option value="150">150x150</option>
+          <option value="300">300x300</option>
+        </select>
+      </div>
+
+      <input
+        type="text"
+        class="input form-control text-center mt-4 w-50"
+        id="text"
+        placeholder="Input Your Text Here"
+      />
+      <div class="mt-4">
+        <!-- <button class="" onclick="generateQr()"> -->
+        <!-- <span class="text">Generate QR</span> -->
+        <!-- </button> -->
+        <input
+          type="button"
+          id="button"
+          class="btn btn-primary button"
+          onclick="generateQr()"
+          value="Generate"
+          onabort=""
+        />
+      </div>
+      </div>
+    </div>
+
+    <script>
+      function generateQr() {
+        var qrapi =
+          "https://chart.googleapis.com/chart?chf=bg,s,65432100&cht=qr&chs=";
+        var text = document.getElementById("text").value;
+        var size = document.getElementById("inputGroupSelect02").value;
+        var img = document.getElementById("qr");
+
+        if (text !== "" && size == "100") {
+          img.src = qrapi + "100x100" + "&chl=" + text;
+        } else if (text !== "" && size == "150") {
+          img.src = qrapi + "150x150" + "&chl=" + text;
+        } else if (text !== "" && size == "300") {
+          img.src = qrapi + "300x300" + "&chl=" + text;
+          // console.log(size)
+        } else {
+          alert("Text Field can not be empty");
+        }
+      }
+    </script>
+  </body>
+</html>
